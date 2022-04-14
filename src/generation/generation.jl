@@ -52,8 +52,8 @@ function erdos_renyi(
             nedges,
             lbound,
             ubound,
-            is_directed;
-            limit_degree = limit_degree,
+            is_directed,
+            limit_degree,
         )
     end
 
@@ -98,7 +98,7 @@ function _weighted_erdos_renyi(
     nedges::Int,
     lbound::Float64,
     ubound::Float64,
-    is_directed::Bool;
+    is_directed::Bool,
     limit_degree::Int,
 )::AbstractGraph
     G = is_directed ? WeightedDiGraph(nvertices) : WeightedGraph(nvertices)
@@ -121,13 +121,13 @@ function _weighted_erdos_renyi(
 end
 
 """
-    _weighted_layered_graph(n::Int, m::Int; is_directed::Bool, lbound::Float64, ubound::Float64):AbstractGraph
+    _weighted_layered_graph(n::Int, m::Int, is_directed::Bool, lbound::Float64, ubound::Float64):AbstractGraph
 
 Generates a weighted layered graph with `n` columns and `m` vertices per column such that each weight `w` is in the interval [`lbound`, `ubound`].
 """
 function _weighted_layered_graph(
     n::Int,
-    m::Int;
+    m::Int,
     is_directed::Bool,
     lbound::Float64,
     ubound::Float64,
@@ -166,7 +166,7 @@ end
 
 Generates a non-weighted layered graph with `n` columns and `m` vertices per column.
 """
-function _layered_graph(n::Int, m::Int; is_directed::Bool)::AbstractGraph
+function _layered_graph(n::Int, m::Int, is_directed::Bool)::AbstractGraph
     nv = 2 + (n * m)
     G = is_directed ? DiGraph(nv) : Graph(nv)
 
@@ -208,14 +208,14 @@ function layered_graph(
     if is_weighted
         return _weighted_layered_graph(
             n,
-            m;
-            is_directed = is_directed,
-            lbound = lbound,
-            ubound = ubound,
+            m,
+            is_directed,
+            lbound,
+            ubound,
         )
     end
 
-    return _layered_graph(n, m; is_directed = is_directed)
+    return _layered_graph(n, m, is_directed)
 end
 
 """
@@ -277,7 +277,7 @@ Generate a unit disk graph [1] with `n` vertices based on a rectangle `b` x `h`.
 function disk_intersection_graph(
     n::Int,
     b::Int,
-    h::Int;
+    h::Int,
     is_weighted::Bool = false,
     lbound::Float64 = 1.0,
     ubound::Float64 = 100.0,
