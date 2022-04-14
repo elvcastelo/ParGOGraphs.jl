@@ -1,7 +1,7 @@
 """
     erdos_renyi(nvertices::Int, nedges::Int; kwargs...)::AbstractGraph
 
-Creates a random graph with `nv` vertices and `nedges` edges using the Erdős–Rényi model [1]. By default the generated graph is undirected. The generation follows an uniform distribution, both for choice of edges and weights.
+Creates a random graph with `nvertices` vertices and `nedges` edges using the Erdős–Rényi model [1]. By default the generated graph is undirected. The generation follows an uniform distribution, both for choice of edges and weights.
 
 The recognized keyword arguments are the following:
 
@@ -15,7 +15,7 @@ The recognized keyword arguments are the following:
 
 [1] https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model
 
-See also [`edge_colored_graph`](@ref).
+See also [``, ``](@ref).
 """
 function erdos_renyi(
     nvertices::Int,
@@ -35,12 +35,12 @@ function erdos_renyi(
     num = nvertices * (nvertices - 1)
     max_edges = is_directed ? num : num / 2
 
-    # if total_edges > max_edges
-    #     max_edges_string = is_directed ? "|V| × (|V| - 1)" : "(|V| × (|V| - 1)) / 2"
-    #     graph_type = is_directed ? "digraph" : "graph"
+    if total_edges > max_edges
+        max_edges_string = is_directed ? "|V| × (|V| - 1)" : "(|V| × (|V| - 1)) / 2"
+        graph_type = is_directed ? "digraph" : "graph"
 
-    #     throw(ErrorException("there can't be more than $max_edges_string edges in a $graph_type"))
-    # end
+        throw(ErrorException("there can't be more than $max_edges_string edges in a $graph_type"))
+    end
 
     if is_weighted
         if lbound > ubound
@@ -271,7 +271,7 @@ end
 
 Generate a unit disk graph [1] with `n` vertices based on a rectangle `b` x `h`. The graph can be weighted by setting `is_weighted = true`. A lower and upper bound can be specified with `lbound` and `ubound` respectively. 
 
-# Reference
+# References
 [1] https://en.wikipedia.org/wiki/Unit_disk_graph
 """
 function disk_intersection_graph(
