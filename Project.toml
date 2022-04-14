@@ -3,6 +3,9 @@ uuid = "9c72e466-2585-4cd6-b2fc-9c3ab070dc04"
 authors = ["Emanuel Castelo <eliaslvcastelo@gmail.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+
 [compat]
 julia = "1"
 

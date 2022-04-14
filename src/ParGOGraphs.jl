@@ -1,5 +1,7 @@
 module ParGOGraphs
 
+using DataStructures: Queue, enqueue!, dequeue!, PriorityQueue, isempty
+
 import Base: getindex
 
 # TODO: Improve on this
