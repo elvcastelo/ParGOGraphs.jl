@@ -15,7 +15,7 @@ The recognized keyword arguments are the following:
 
 [1] https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model
 
-See also [``, ``](@ref).
+See also [`layered_graph`, `disk_intersection_graph`](@ref).
 """
 function erdos_renyi(
     nvertices::Int,
